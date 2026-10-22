@@ -1,4 +1,6 @@
-# CleanYourTV N1 Edition
+# CleanYourTV N1 中文版说明
+
+> **AI 构建声明：** 本衍生版的代码修改、界面设计、测试和文档由 AI 协助完成；已在真实 N1 上验证，但仍建议二次开发者自行审计与备份。
 
 这是 [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) 的非官方 N1 衍生版本，针对斐讯 N1（Android 7.1 / API 25）和客厅电视使用场景做了兼容与集成改进。
 
@@ -48,6 +50,7 @@ adb shell cmd package set-home-activity com.gathin.tvhome/.MainActivity
 - 上游许可证：MIT
 - 本仓库保留上游来源提交、`LICENSE` 和版权声明。
 - 修改内容与第三方资源说明见 [NOTICE.md](NOTICE.md)。
+- AI 构建边界和风险提示见 [AI-NOTICE.md](AI-NOTICE.md)。
 
 本衍生版同样按 MIT License 分发。
 

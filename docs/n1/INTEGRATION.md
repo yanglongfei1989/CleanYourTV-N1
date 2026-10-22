@@ -1,20 +1,20 @@
-# N1 Remote integration notes
+# N1 Remote 集成说明
 
-## Provider contract
+## Provider 接口约定
 
-Authority:
+Authority：
 
 ```text
 com.gathin.n1remote.status
 ```
 
-URI:
+URI：
 
 ```text
 content://com.gathin.n1remote.status/status
 ```
 
-Columns:
+字段：
 
 - `ip`
 - `port`
@@ -22,22 +22,21 @@ Columns:
 - `serviceOnline`
 - `url`
 
-The launcher queries only when Home is visible. The card is non-focusable and does not participate
-in D-pad navigation.
+桌面仅在首页可见时查询。状态卡不可获得焦点，不参与方向键导航。
 
-## Startup layout
+## 启动布局
 
-N1 package discovery can finish after the first Window focus. The launcher therefore:
+N1 的应用扫描可能在首次窗口焦点之后才完成。因此桌面会：
 
-1. Reconciles the Dock padding at several startup checkpoints.
-2. Waits for the first child view to exist.
-3. Clears transient focus from the empty RecyclerView.
-4. Focuses the first dock card and only then clears the cold-start flag.
-5. Refits the shared highlight after the Dock layout settles.
+1. 在多个启动检查点重新校正 Dock 内边距。
+2. 等待第一个子视图真正创建。
+3. 清除空 RecyclerView 的临时焦点。
+4. 聚焦第一张 Dock 卡片，成功后才清除冷启动标记。
+5. Dock 布局稳定后重新贴合共享高亮框。
 
-## Icon banners
+## 应用横幅
 
-`app_banners` maps package names to bundled drawable names:
+`app_banners` 将包名映射到桌面内置 Drawable：
 
 ```xml
 <item>com.gathin.n1remote=banner_n1remote</item>
@@ -45,5 +44,5 @@ N1 package discovery can finish after the first Window focus. The launcher there
 <item>com.android.tv.settings=banner_settings</item>
 ```
 
-This survives an app update or reinstall as long as the package name is unchanged.
+只要应用包名不变，更新或重装后横幅仍能保持。
 
