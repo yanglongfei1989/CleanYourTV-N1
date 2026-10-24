@@ -60,8 +60,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: List gradle tasks（可选，用来排查）
+        run: ./gradlew tasks
+
+      - name: Build Debug APK（重点修改这里！）
+        run: ./gradlew :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
