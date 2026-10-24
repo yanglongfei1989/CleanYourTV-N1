@@ -1,5 +1,5 @@
-name: Build CleanYourTV-N1 Auto
-run-name: ${{ github.actor }} 自动编译
+name: Build CleanYourTV-N1
+run-name: ${{ github.actor }} 编译CleanYourTV-N1
 on:
   workflow_dispatch:
   push:
@@ -31,23 +31,17 @@ jobs:
           gradle wrapper --gradle-version 6.7.1
           chmod +x gradlew
 
-      - name: 导出SDK路径配置
+      - name: 写入SDK配置
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
-      - name: 自动查找可打包的安卓模块
-        id: find_module
-        run: |
-          ./gradlew projects --quiet > sub_list.txt
-          MODULE=$(grep -E '^\s*\+ Project' sub_list.txt | head -n1 | sed -E 's/.*Project \'([^\']+)\'.*/\1/')
-          echo "MODULE=$MODULE" >> $GITHUB_ENV
-          echo "找到模块名称: $MODULE"
+      - name: 查看可用任务（调试用）
+        run: ./gradlew tasks
 
-      - name: 执行编译 :${{ env.MODULE }}:assembleDebug
-        run: ./gradlew :${{ env.MODULE }}:assembleDebug
+      - name: 编译Debug APK（根项目直接打包，不带模块前缀！）
+        run: ./gradlew assembleDebug
 
-      - name: 上传编译产物APK
+      - name: 上传APK产物
         uses: actions/upload-artifact@v4
         with:
-          name: 编译好的APK
-          path: |
-            */build/outputs/apk/debug/*.apk
+          name: CleanYourTV-N1-APK
+          path: build/outputs/apk/debug/*.apk
